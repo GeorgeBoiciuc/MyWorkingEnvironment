@@ -1,6 +1,6 @@
 ﻿namespace MyWorkingEnvironment.Models
 {
-    public class MeetinRoomModel
+    public class MeetingRoomModel
     {
         public Guid IdMeetingRoom { get; set; }
         public string Name { get; set; } = null!;
