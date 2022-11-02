@@ -1,0 +1,1 @@
+ConnectionStrings__DefaultConnection=Data Source=DESKTOP-CL8801R;Initial Catalog=MyWorkingEnvironmentDB;Integrated Security=True;MultipleActiveResultSets=True
