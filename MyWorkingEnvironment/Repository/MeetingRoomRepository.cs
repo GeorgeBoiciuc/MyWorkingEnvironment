@@ -1,20 +1,22 @@
-﻿using MyWorkingEnvironment.Models;
-using MyWorkingEnvironment.Models.DBObbjects;
+﻿using MyWorkingEnvironment.Data;
+using MyWorkingEnvironment.Models.DBObjects;
+using MyWorkingEnvironment.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace MyWorkingEnvironment.Repository
 {
     public class MeetingRoomRepository
     {
-        private MyWorkingEnvironmentDBContext _DbContext;
+        private ApplicationDbContext _dbContext;
 
         public MeetingRoomRepository()
         {
-            _DbContext = new MyWorkingEnvironmentDBContext();
+            _dbContext = new ApplicationDbContext();
         }
 
-        public MeetingRoomRepository(MyWorkingEnvironmentDBContext dbContext)
+        public MeetingRoomRepository(ApplicationDbContext dbContext)
         {
-            _DbContext = dbContext;
+            _dbContext = dbContext;
         }
 
         private MeetingRoomModel MapDBObjectToModel(MeetingRoom dbobject)
@@ -37,6 +39,49 @@ namespace MyWorkingEnvironment.Repository
                 dbobject.Name = model.Name;
             }
             return dbobject;
+        }
+
+        public List<MeetingRoomModel> GetAllMeetingRooms()
+        {
+            var list = new List<MeetingRoomModel>();
+            foreach (var dbObject in _dbContext.MeetingRooms)
+            {
+                list.Add(MapDBObjectToModel(dbObject));
+            }
+            return list;
+        }
+
+        public MeetingRoomModel GetEmployeeById(Guid id)
+        {
+            return MapDBObjectToModel(_dbContext.MeetingRooms.FirstOrDefault(x => x.IdMeetingRoom == id));
+        }
+
+        public void InsertMeetingRoom(MeetingRoomModel model)
+        {
+            model.IdMeetingRoom = Guid.NewGuid();
+            _dbContext.MeetingRooms.Add(MapModelToDBObject(model));
+            _dbContext.SaveChanges();
+        }
+
+        public void UpdateMeetingRoom(MeetingRoomModel model)
+        {
+            var dbObject = _dbContext.MeetingRooms.FirstOrDefault(x => x.IdMeetingRoom == model.IdMeetingRoom);
+            if (dbObject != null)
+            {
+                dbObject.IdMeetingRoom = model.IdMeetingRoom;
+                dbObject.Name = model.Name;
+                _dbContext.SaveChanges();
+            }
+        }
+
+        public void DeleteMeetingRoom(Guid id)
+        {
+            var dbObject = _dbContext.MeetingRooms.FirstOrDefault(x => x.IdMeetingRoom == id);
+            if (dbObject != null)
+            {
+                _dbContext.MeetingRooms.Remove(dbObject);
+                _dbContext.SaveChanges();
+            }
         }
     }
 }

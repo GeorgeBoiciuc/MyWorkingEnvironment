@@ -1,1 +1,5 @@
 ConnectionStrings__DefaultConnection=Data Source=DESKTOP-CL8801R;Initial Catalog=MyWorkingEnvironmentDB;Integrated Security=True;MultipleActiveResultSets=True
+
+
+
+PM> Scaffold-DbContext "Server=DESKTOP-CL8801R;Database=myworkingenvironment;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models\DBObjects

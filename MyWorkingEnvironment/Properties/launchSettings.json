@@ -8,7 +8,7 @@
         "ConnectionStrings__DefaultConnection": "Data Source=DESKTOP-CL8801R;Initial Catalog=MyWorkingEnvironmentDB;Integrated Security=True;MultipleActiveResultSets=True"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:7072;http://localhost:5072"
+      "applicationUrl": "https://localhost:7016;http://localhost:5016"
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -22,8 +22,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:16574",
-      "sslPort": 44323
+      "applicationUrl": "http://localhost:4627",
+      "sslPort": 44305
     }
   }
 }

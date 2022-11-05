@@ -1,6 +1,4 @@
-﻿using MyWorkingEnvironment.Models.DBObbjects;
-
-namespace MyWorkingEnvironment.Models
+﻿namespace MyWorkingEnvironment.Models
 {
     public class ClockingModel
     {

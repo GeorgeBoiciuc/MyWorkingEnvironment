@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MyWorkingEnvironment.Models.DBObbjects
+namespace MyWorkingEnvironment.Models.DBObjects
 {
     public partial class Reservation
     {

@@ -1,21 +1,21 @@
 ﻿using MyWorkingEnvironment.Data;
+using MyWorkingEnvironment.Models.DBObjects;
 using MyWorkingEnvironment.Models;
-using MyWorkingEnvironment.Models.DBObbjects;
 
 namespace MyWorkingEnvironment.Repository
 {
     public class ClockingRepository
     {
-        private MyWorkingEnvironmentDBContext _DbContext;
+        private ApplicationDbContext _dbContext;
 
         public ClockingRepository()
         {
-            _DbContext = new MyWorkingEnvironmentDBContext();
+            _dbContext = new ApplicationDbContext();
         }
 
-        public ClockingRepository(MyWorkingEnvironmentDBContext dbContext)
+        public ClockingRepository(ApplicationDbContext dbContext)
         {
-            _DbContext = dbContext;
+            _dbContext = dbContext;
         }
 
         private ClockingModel MapDBObjectToModel(Clocking dbobject)
@@ -46,6 +46,52 @@ namespace MyWorkingEnvironment.Repository
             }
 
             return dbobject;
+        }
+
+        public List<ClockingModel> GetAllClockings()
+        {
+            var list = new List<ClockingModel>();
+            foreach (var dbObject in _dbContext.Clockings)
+            {
+                list.Add(MapDBObjectToModel(dbObject));
+            }
+            return list;
+        }
+
+        public ClockingModel GetClokingById(Guid id)
+        {
+            return MapDBObjectToModel(_dbContext.Clockings.FirstOrDefault(x => x.IdClocking == id));
+        }
+
+        public void InsertClocking(ClockingModel model)
+        {
+            model.IdClocking = Guid.NewGuid();
+            _dbContext.Clockings.Add(MapModelToDBObject(model));
+            _dbContext.SaveChanges();
+        }
+
+        public void UpdateCloking(ClockingModel model)
+        {
+            var dbObject = _dbContext.Clockings.FirstOrDefault(x => x.IdClocking == model.IdClocking);
+            if (dbObject != null)
+            {
+                dbObject.IdClocking = model.IdClocking;
+                dbObject.IdEmployee = model.IdEmployee;
+                dbObject.Type = model.Type;
+                dbObject.CheckIn = model.CheckIn;
+                dbObject.CheckOut = model.CheckOut;
+                _dbContext.SaveChanges();
+            }
+        }
+
+        public void DeleteClocking(Guid id)
+        {
+            var dbObject = _dbContext.Clockings.FirstOrDefault(x => x.IdClocking == id);
+            if (dbObject != null)
+            {
+                _dbContext.Clockings.Remove(dbObject);
+                _dbContext.SaveChanges();
+            }
         }
     }
 }
