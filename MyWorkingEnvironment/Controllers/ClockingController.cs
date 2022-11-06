@@ -23,7 +23,7 @@ namespace MyWorkingEnvironment.Controllers
         }
 
         // GET: ClockingController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(Guid id)
         {
             return View();
         }
@@ -57,28 +57,37 @@ namespace MyWorkingEnvironment.Controllers
         }
 
         // GET: ClockingController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid id)
         {
-            return View();
+            var model = _clockingRepository.GetClokingById(id);
+            return View("EditClocking", model);
         }
 
         // POST: ClockingController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Guid id, IFormCollection collection)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var model = new ClockingModel();
+                var task = TryUpdateModelAsync(model);
+                model.IdClocking = id;
+                task.Wait();
+                if (task.Result)
+                {
+                    _clockingRepository.UpdateCloking(model);
+                }
+                return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return RedirectToAction("Edit", id);
             }
         }
 
         // GET: ClockingController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
             return View();
         }
@@ -86,7 +95,7 @@ namespace MyWorkingEnvironment.Controllers
         // POST: ClockingController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(Guid id, IFormCollection collection)
         {
             try
             {

@@ -59,7 +59,8 @@ namespace MyWorkingEnvironment.Controllers
         // GET: EmployeeController/Edit/5
         public ActionResult Edit(Guid id)
         {
-            return View();
+            var model = _employeeRepository.GetEmployeeById(id);
+            return View("EditEmployee", model);
         }
 
         // POST: EmployeeController/Edit/5
@@ -69,11 +70,19 @@ namespace MyWorkingEnvironment.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var model = new EmployeeModel();
+                var task = TryUpdateModelAsync(model);
+                model.IdEmployee = id;
+                task.Wait();
+                if (task.Result)
+                {
+                    _employeeRepository.UpdateEmployee(model);
+                }
+                return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return RedirectToAction("Edit", id);
             }
         }
 

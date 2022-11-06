@@ -3,3 +3,6 @@ ConnectionStrings__DefaultConnection=Data Source=DESKTOP-CL8801R;Initial Catalog
 
 
 PM> Scaffold-DbContext "Server=DESKTOP-CL8801R;Database=myworkingenvironment;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models\DBObjects
+
+
+Scaffold-DbContext "Server=DESKTOP-CL8801R;Database=MyWorkingEnvironmentDB;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models\DBObjects -f -ContextDir Data -Context ApplicationDbContext

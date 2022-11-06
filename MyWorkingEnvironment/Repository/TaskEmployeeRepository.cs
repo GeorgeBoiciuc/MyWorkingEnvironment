@@ -69,7 +69,7 @@ namespace MyWorkingEnvironment.Repository
 
         public void UpdateTaskEmployee(TaskEmployeeModel model)
         {
-            var dbObject = GetTaskEmployeeById(model.IdTask);
+            var dbObject = _dbContext.TaskEmployees.FirstOrDefault(x => x.IdTask == model.IdTask);
             if (dbObject != null)
             {
                 dbObject.IdTask = model.IdTask;

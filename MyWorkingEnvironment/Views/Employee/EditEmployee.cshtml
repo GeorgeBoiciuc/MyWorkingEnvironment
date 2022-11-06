@@ -1,0 +1,64 @@
+﻿@model MyWorkingEnvironment.Models.EmployeeModel
+
+@{
+    ViewData["Title"] = "EditEmployee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>EditEmployee</h1>
+
+<h4>EmployeeModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+@*            <div class="form-group">
+                <label asp-for="IdEmployee" class="control-label"></label>
+                <input asp-for="IdEmployee" class="form-control" />
+                <span asp-validation-for="IdEmployee" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdTask" class="control-label"></label>
+                <input asp-for="IdTask" class="form-control" />
+                <span asp-validation-for="IdTask" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdReservation" class="control-label"></label>
+                <input asp-for="IdReservation" class="form-control" />
+                <span asp-validation-for="IdReservation" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VacationDays" class="control-label"></label>
+                <input asp-for="VacationDays" class="form-control" />
+                <span asp-validation-for="VacationDays" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -59,7 +59,8 @@ namespace MyWorkingEnvironment.Controllers
         // GET: MeetingRoomController/Edit/5
         public ActionResult Edit(Guid id)
         {
-            return View();
+            var model = _meetingRoomRepository.GetEmployeeById(id);
+            return View("EditMeetingRoom", model);
         }
 
         // POST: MeetingRoomController/Edit/5
@@ -69,11 +70,19 @@ namespace MyWorkingEnvironment.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var model = new MeetingRoomModel();
+                var task = TryUpdateModelAsync(model);
+                model.IdMeetingRoom = id;
+                task.Wait();
+                if (task.Result)
+                {
+                    _meetingRoomRepository.UpdateMeetingRoom(model);
+                }
+                return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return RedirectToAction("Edit", id);
             }
         }
 

@@ -23,12 +23,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xvY2tpbmdcQ3JlYXRlQ2xvY2tpbmcuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/George/Desktop/Scoala Informala/Proiect Final/MyWorkingEnvironment/Views/Clocking/EditClocking.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xvY2tpbmdcRWRpdENsb2NraW5nLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/George/Desktop/Scoala Informala/Proiect Final/MyWorkingEnvironment/Views/Clocking/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xvY2tpbmdcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/George/Desktop/Scoala Informala/Proiect Final/MyWorkingEnvironment/Views/Employee/CreateEmployee.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVcQ3JlYXRlRW1wbG95ZWUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/George/Desktop/Scoala Informala/Proiect Final/MyWorkingEnvironment/Views/Employee/EditEmployee.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVcRWRpdEVtcGxveWVlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/George/Desktop/Scoala Informala/Proiect Final/MyWorkingEnvironment/Views/Employee/Index.cshtml]
@@ -47,12 +55,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVldGluZ1Jvb21cQ3JlYXRlTWVldGluZ1Jvb20uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/George/Desktop/Scoala Informala/Proiect Final/MyWorkingEnvironment/Views/MeetingRoom/EditMeetingRoom.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVldGluZ1Jvb21cRWRpdE1lZXRpbmdSb29tLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/George/Desktop/Scoala Informala/Proiect Final/MyWorkingEnvironment/Views/MeetingRoom/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVldGluZ1Jvb21cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/George/Desktop/Scoala Informala/Proiect Final/MyWorkingEnvironment/Views/Reservation/CreateReservation.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cQ3JlYXRlUmVzZXJ2YXRpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/George/Desktop/Scoala Informala/Proiect Final/MyWorkingEnvironment/Views/Reservation/EditReservation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cRWRpdFJlc2VydmF0aW9uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/George/Desktop/Scoala Informala/Proiect Final/MyWorkingEnvironment/Views/Reservation/Index.cshtml]
@@ -73,6 +89,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/George/Desktop/Scoala Informala/Proiect Final/MyWorkingEnvironment/Views/TaskEmployee/CreateTaskEmployee.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza0VtcGxveWVlXENyZWF0ZVRhc2tFbXBsb3llZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/George/Desktop/Scoala Informala/Proiect Final/MyWorkingEnvironment/Views/TaskEmployee/EditTaskEmployee.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFza0VtcGxveWVlXEVkaXRUYXNrRW1wbG95ZWUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/George/Desktop/Scoala Informala/Proiect Final/MyWorkingEnvironment/Views/TaskEmployee/Index.cshtml]
