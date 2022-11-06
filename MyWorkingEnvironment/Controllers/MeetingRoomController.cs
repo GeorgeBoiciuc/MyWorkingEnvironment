@@ -25,7 +25,8 @@ namespace MyWorkingEnvironment.Controllers
         // GET: MeetingRoomController/Details/5
         public ActionResult Details(Guid id)
         {
-            return View();
+            var model = _meetingRoomRepository.GetMeetingRoomById(id);
+            return View("DetailsMeetingRoom", model);
         }
 
         // GET: MeetingRoomController/Create
@@ -59,7 +60,7 @@ namespace MyWorkingEnvironment.Controllers
         // GET: MeetingRoomController/Edit/5
         public ActionResult Edit(Guid id)
         {
-            var model = _meetingRoomRepository.GetEmployeeById(id);
+            var model = _meetingRoomRepository.GetMeetingRoomById(id);
             return View("EditMeetingRoom", model);
         }
 
@@ -89,7 +90,8 @@ namespace MyWorkingEnvironment.Controllers
         // GET: MeetingRoomController/Delete/5
         public ActionResult Delete(Guid id)
         {
-            return View();
+            var model = _meetingRoomRepository.GetMeetingRoomById(id);
+            return View("DeleteMeetingRoom", model);
         }
 
         // POST: MeetingRoomController/Delete/5
@@ -99,11 +101,12 @@ namespace MyWorkingEnvironment.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                _meetingRoomRepository.DeleteMeetingRoom(id);
+                return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return RedirectToAction("Delete", id);
             }
         }
     }

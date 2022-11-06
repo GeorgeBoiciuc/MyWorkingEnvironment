@@ -25,7 +25,8 @@ namespace MyWorkingEnvironment.Controllers
         // GET: TaskEmployeeController/Details/5
         public ActionResult Details(Guid id)
         {
-            return View();
+            var model = _taskEmployeeRepository.GetTaskEmployeeById(id);
+            return View("DetailsTaskEmployee", model);
         }
 
         // GET: TaskEmployeeController/Create
@@ -89,7 +90,8 @@ namespace MyWorkingEnvironment.Controllers
         // GET: TaskEmployeeController/Delete/5
         public ActionResult Delete(Guid id)
         {
-            return View();
+            var model = _taskEmployeeRepository.GetTaskEmployeeById(id);
+            return View("DeleteTaskEmployee", model);
         }
 
         // POST: TaskEmployeeController/Delete/5
@@ -99,11 +101,12 @@ namespace MyWorkingEnvironment.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                _taskEmployeeRepository.DeleteTaskEmployee(id);
+                return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return RedirectToAction("Delete", id);
             }
         }
     }

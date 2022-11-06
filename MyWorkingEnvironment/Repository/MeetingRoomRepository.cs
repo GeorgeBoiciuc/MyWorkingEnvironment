@@ -51,7 +51,7 @@ namespace MyWorkingEnvironment.Repository
             return list;
         }
 
-        public MeetingRoomModel GetEmployeeById(Guid id)
+        public MeetingRoomModel GetMeetingRoomById(Guid id)
         {
             return MapDBObjectToModel(_dbContext.MeetingRooms.FirstOrDefault(x => x.IdMeetingRoom == id));
         }

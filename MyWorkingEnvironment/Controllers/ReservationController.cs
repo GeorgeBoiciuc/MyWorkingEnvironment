@@ -25,7 +25,8 @@ namespace MyWorkingEnvironment.Controllers
         // GET: ReservationController/Details/5
         public ActionResult Details(Guid id)
         {
-            return View();
+            var model = _reservationRepository.GetReservationById(id);
+            return View("DetailsReservation", model);
         }
 
         // GET: ReservationController/Create
@@ -89,7 +90,8 @@ namespace MyWorkingEnvironment.Controllers
         // GET: ReservationController/Delete/5
         public ActionResult Delete(Guid id)
         {
-            return View();
+            var model = _reservationRepository.GetReservationById(id);
+            return View("DeleteReservation", model);
         }
 
         // POST: ReservationController/Delete/5
@@ -99,11 +101,12 @@ namespace MyWorkingEnvironment.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                _reservationRepository.GetReservationById(id);
+                return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return RedirectToAction("Delete", id);
             }
         }
     }

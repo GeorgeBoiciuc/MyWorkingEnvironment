@@ -25,7 +25,8 @@ namespace MyWorkingEnvironment.Controllers
         // GET: ClockingController/Details/5
         public ActionResult Details(Guid id)
         {
-            return View();
+            var model = _clockingRepository.GetClokingById(id);
+            return View("DetailsClocking", model);
         }
 
         // GET: ClockingController/Create
@@ -89,7 +90,8 @@ namespace MyWorkingEnvironment.Controllers
         // GET: ClockingController/Delete/5
         public ActionResult Delete(Guid id)
         {
-            return View();
+            var model = _clockingRepository.GetClokingById(id);
+            return View("DeleteClocking", model);
         }
 
         // POST: ClockingController/Delete/5
@@ -99,11 +101,12 @@ namespace MyWorkingEnvironment.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                _clockingRepository.DeleteClocking(id);
+                return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return RedirectToAction("Delete", id);
             }
         }
     }
