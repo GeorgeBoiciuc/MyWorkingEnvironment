@@ -101,7 +101,7 @@ namespace MyWorkingEnvironment.Controllers
         {
             try
             {
-                _reservationRepository.GetReservationById(id);
+                _reservationRepository.DeleteReservation(id);
                 return RedirectToAction("Index");
             }
             catch
