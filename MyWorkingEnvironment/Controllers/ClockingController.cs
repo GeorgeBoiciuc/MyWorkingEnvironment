@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MyWorkingEnvironment.Data;
 using MyWorkingEnvironment.Models;
 using MyWorkingEnvironment.Repository;
@@ -9,9 +10,11 @@ namespace MyWorkingEnvironment.Controllers
     public class ClockingController : Controller
     {
         private ClockingRepository _clockingRepository;
+        private EmployeeRepository _employeeRepository;
 
         public ClockingController(ApplicationDbContext dbContext)
         {
+            _employeeRepository = new EmployeeRepository(dbContext);
             _clockingRepository = new ClockingRepository(dbContext);
         }
 
@@ -32,6 +35,9 @@ namespace MyWorkingEnvironment.Controllers
         // GET: ClockingController/Create
         public ActionResult Create()
         {
+            var employees = _employeeRepository.GetAllEmployees();
+            var employeeList = employees.Select(x => new SelectListItem(x.FirstName, x.IdEmployee.ToString()));
+            ViewBag.EmployeeList = employeeList;
             return View("CreateClocking");
         }
 
@@ -43,6 +49,7 @@ namespace MyWorkingEnvironment.Controllers
             try
             {
                 var model = new ClockingModel();
+                // IdEmployee trebuie sa vina in functie de cine este logat pe cont
                 var task = TryUpdateModelAsync(model);
                 task.Wait();
                 if (task.Result)

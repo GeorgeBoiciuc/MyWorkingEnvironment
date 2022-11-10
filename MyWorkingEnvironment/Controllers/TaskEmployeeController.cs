@@ -73,7 +73,7 @@ namespace MyWorkingEnvironment.Controllers
             {
                 var model = new TaskEmployeeModel();
                 var task = TryUpdateModelAsync(model); //modelul nu ia id-ul, iar aceasta ramane null
-                model.IdTask = id;
+                //model.IdTask = id;
                 task.Wait();
                 if (task.Result)
                 {

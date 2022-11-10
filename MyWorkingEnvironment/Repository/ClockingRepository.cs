@@ -7,9 +7,11 @@ namespace MyWorkingEnvironment.Repository
     public class ClockingRepository
     {
         private ApplicationDbContext _dbContext;
+        private EmployeeRepository _employeeRepository;
 
         public ClockingRepository()
         {
+            _employeeRepository = new EmployeeRepository();
             _dbContext = new ApplicationDbContext();
         }
 

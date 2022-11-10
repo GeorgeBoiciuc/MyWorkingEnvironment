@@ -8,4 +8,12 @@
         public DateTime CheckIn { get; set; }
         public DateTime CheckOut { get; set; }
     }
+
+    public enum ClockingType
+    {
+        Workday,
+        Vacation,
+        NationalHoliday,
+        Sickleave
+    }
 }
