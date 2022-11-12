@@ -35,6 +35,7 @@ namespace MyWorkingEnvironment.Controllers
         // GET: ClockingController/Create
         public ActionResult Create()
         {
+            // IdEmployee trebuie sa vina in functie de cine este logat pe cont
             var employees = _employeeRepository.GetAllEmployees();
             var employeeList = employees.Select(x => new SelectListItem(x.FirstName, x.IdEmployee.ToString()));
             ViewBag.EmployeeList = employeeList;
@@ -49,13 +50,14 @@ namespace MyWorkingEnvironment.Controllers
             try
             {
                 var model = new ClockingModel();
-                // IdEmployee trebuie sa vina in functie de cine este logat pe cont
                 var task = TryUpdateModelAsync(model);
                 task.Wait();
-                if (task.Result)
-                {
+                //task.Result = false,nu am putut sa-mi dau seama care e problema, dar cred ca are legatura cu maparea obiectului
+                //nu e de la ClockingType
+                //if (task.Result)
+                //{
                     _clockingRepository.InsertClocking(model);
-                }
+                //}
                 return RedirectToAction("Index");
             }
             catch
@@ -80,7 +82,6 @@ namespace MyWorkingEnvironment.Controllers
             {
                 var model = new ClockingModel();
                 var task = TryUpdateModelAsync(model);
-                model.IdClocking = id;
                 task.Wait();
                 if (task.Result)
                 {
