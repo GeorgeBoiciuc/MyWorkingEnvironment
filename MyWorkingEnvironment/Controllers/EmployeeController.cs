@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MyWorkingEnvironment.Data;
 using MyWorkingEnvironment.Models;
 using MyWorkingEnvironment.Repository;
@@ -9,9 +10,13 @@ namespace MyWorkingEnvironment.Controllers
     public class EmployeeController : Controller
     {
         private EmployeeRepository _employeeRepository;
+        private ReservationRepository _reservationRepository;
+        private TaskEmployeeRepository _taskEmployeeRepository;
 
         public EmployeeController(ApplicationDbContext dbContext)
         {
+            _reservationRepository = new ReservationRepository(dbContext);
+            _taskEmployeeRepository = new TaskEmployeeRepository(dbContext);
             _employeeRepository = new EmployeeRepository(dbContext);
         }
 
@@ -32,6 +37,13 @@ namespace MyWorkingEnvironment.Controllers
         // GET: EmployeeController/Create
         public ActionResult Create()
         {
+            var reservations = _reservationRepository.GetAllReservations();
+            var reservationList = reservations.Select(x => new SelectListItem(x.IdReservation.ToString(), x.IdReservation.ToString()));
+            ViewBag.ReservationList = reservationList;
+
+            var tasksEmployee = _taskEmployeeRepository.GetAllTaskEmployees();
+            var taskEmployeeList = tasksEmployee.Select(x => new SelectListItem(x.Title, x.IdTask.ToString()));
+            ViewBag.TaskEmployeeList = taskEmployeeList;
             return View("CreateEmployee");
         }
 
@@ -45,10 +57,10 @@ namespace MyWorkingEnvironment.Controllers
                 var model = new EmployeeModel();
                 var task = TryUpdateModelAsync(model);
                 task.Wait();
-                if (task.Result)
-                {
+                //if (task.Result)
+                //{
                     _employeeRepository.InsertEmployee(model);
-                }
+                //}
                 return RedirectToAction("Index");
             }
             catch
@@ -73,7 +85,6 @@ namespace MyWorkingEnvironment.Controllers
             {
                 var model = new EmployeeModel();
                 var task = TryUpdateModelAsync(model);
-                model.IdEmployee = id;
                 task.Wait();
                 if (task.Result)
                 {

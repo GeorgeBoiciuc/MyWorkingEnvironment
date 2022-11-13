@@ -45,10 +45,10 @@ namespace MyWorkingEnvironment.Controllers
                 var model = new ReservationModel();
                 var task = TryUpdateModelAsync(model);
                 task.Wait();
-                if (task.Result)
-                {
+                //if (task.Result) din nou task.Result e fals, dar maparea se poate face pe obiect
+                //{
                     _reservationRepository.InsertReservation(model);
-                }
+                //}
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -73,7 +73,6 @@ namespace MyWorkingEnvironment.Controllers
             {
                 var model = new ReservationModel();
                 var task = TryUpdateModelAsync(model);
-                model.IdReservation = id;
                 task.Wait();
                 if (task.Result)
                 {

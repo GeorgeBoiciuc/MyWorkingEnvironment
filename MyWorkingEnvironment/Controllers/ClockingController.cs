@@ -37,7 +37,7 @@ namespace MyWorkingEnvironment.Controllers
         {
             // IdEmployee trebuie sa vina in functie de cine este logat pe cont
             var employees = _employeeRepository.GetAllEmployees();
-            var employeeList = employees.Select(x => new SelectListItem(x.FirstName, x.IdEmployee.ToString()));
+            var employeeList = employees.Select(x => new SelectListItem( x.FirstName + " " + x.LastName, x.IdEmployee.ToString()));
             ViewBag.EmployeeList = employeeList;
             return View("CreateClocking");
         }
