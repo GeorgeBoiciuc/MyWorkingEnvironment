@@ -98,8 +98,8 @@ namespace MyWorkingEnvironment.Repository
             if (dbObject != null)
             {
                 //var tasks = _DbContext.TaskEmployees.Where(x => x.IdTask == dbObject.IdTask);
-                _taskEmployeeRepository.DeleteTaskEmployee((Guid)dbObject.IdTask);
-                _reservationReposotiry.DeleteReservation((Guid)dbObject.IdReservation);
+                //_taskEmployeeRepository.DeleteTaskEmployee((Guid)dbObject.IdTask);
+                //_reservationReposotiry.DeleteReservation((Guid)dbObject.IdReservation);
 
                 //var reservations = _reservationReposotiry.GetReservationById((Guid)dbObject.IdReservation);
                 //var reservations = _DbContext.Reservations.Where(x => x.IdReservation == dbObject.IdReservation);
@@ -108,6 +108,16 @@ namespace MyWorkingEnvironment.Repository
                 //    _DbContext.Reservations.Remove(reservation);
                 //}
 
+                var tasks = _DbContext.TaskEmployees.FirstOrDefault(x => x.IdTask == dbObject.IdTask);
+                //foreach (var task in tasks)
+                //{
+                    _DbContext.TaskEmployees.Remove(tasks);
+                //}
+                var reservations = _DbContext.Reservations.FirstOrDefault(x => x.IdReservation == dbObject.IdReservation);
+                //foreach (var reservation in reservations)
+                //{
+                    _DbContext.Reservations.Remove(reservations);
+                //}
 
                 _DbContext.Employees.Remove(dbObject);
                 _DbContext.SaveChanges();
