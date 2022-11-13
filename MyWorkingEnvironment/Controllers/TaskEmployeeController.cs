@@ -45,10 +45,10 @@ namespace MyWorkingEnvironment.Controllers
                 var model = new TaskEmployeeModel();
                 var task = TryUpdateModelAsync(model);
                 task.Wait();
-                //if (task.Result) din nou task.Resul=false, dar obiectul se mapeaza cu date
-                //{
+                if (task.Result)
+                {
                     _taskEmployeeRepository.InsertTaskEmployee(model);
-                //}
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch

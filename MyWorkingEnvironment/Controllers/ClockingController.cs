@@ -52,12 +52,10 @@ namespace MyWorkingEnvironment.Controllers
                 var model = new ClockingModel();
                 var task = TryUpdateModelAsync(model);
                 task.Wait();
-                //task.Result = false,nu am putut sa-mi dau seama care e problema, dar cred ca are legatura cu maparea obiectului
-                //nu e de la ClockingType
-                //if (task.Result)
-                //{
+                if (task.Result)
+                {
                     _clockingRepository.InsertClocking(model);
-                //}
+                }
                 return RedirectToAction("Index");
             }
             catch

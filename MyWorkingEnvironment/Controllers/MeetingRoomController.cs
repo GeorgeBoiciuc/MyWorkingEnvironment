@@ -73,7 +73,6 @@ namespace MyWorkingEnvironment.Controllers
             {
                 var model = new MeetingRoomModel();
                 var task = TryUpdateModelAsync(model);
-                model.IdMeetingRoom = id;
                 task.Wait();
                 if (task.Result)
                 {

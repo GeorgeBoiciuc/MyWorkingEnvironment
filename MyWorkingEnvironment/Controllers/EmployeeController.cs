@@ -57,10 +57,10 @@ namespace MyWorkingEnvironment.Controllers
                 var model = new EmployeeModel();
                 var task = TryUpdateModelAsync(model);
                 task.Wait();
-                //if (task.Result)
-                //{
+                if (task.Result)
+                {
                     _employeeRepository.InsertEmployee(model);
-                //}
+                }
                 return RedirectToAction("Index");
             }
             catch
