@@ -1,7 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MyWorkingEnvironment.Data;
-using MyWorkingEnvironment.Models;
+﻿using MyWorkingEnvironment.Data;
 using MyWorkingEnvironment.Models.DBObjects;
+using MyWorkingEnvironment.Models;
 
 namespace MyWorkingEnvironment.Repository
 {
@@ -24,7 +23,8 @@ namespace MyWorkingEnvironment.Repository
             var model = new TaskEmployeeModel();
             if (dbObject != null)
             {
-                model.IdTask = dbObject.IdTask;
+                model.IdTaskEmployee = dbObject.IdTaskEmployee;
+                model.IdEmployee = dbObject.IdEmployee;
                 model.Title = dbObject.Title;
                 model.Priority = dbObject.Priority;
                 model.Description = dbObject.Description;
@@ -37,7 +37,8 @@ namespace MyWorkingEnvironment.Repository
             var dbObject = new TaskEmployee();
             if (model != null)
             {
-                dbObject.IdTask = model.IdTask;
+                dbObject.IdTaskEmployee = model.IdTaskEmployee;
+                dbObject.IdEmployee = model.IdEmployee;
                 dbObject.Title = model.Title;
                 dbObject.Priority = model.Priority;
                 dbObject.Description = model.Description;
@@ -57,22 +58,23 @@ namespace MyWorkingEnvironment.Repository
 
         public TaskEmployeeModel GetTaskEmployeeById(Guid id)
         {
-            return MapDBObjectToModel(_dbContext.TaskEmployees.FirstOrDefault(x => x.IdTask == id));
+            return MapDBObjectToModel(_dbContext.TaskEmployees.FirstOrDefault(x => x.IdTaskEmployee == id));
         }
 
         public void InsertTaskEmployee(TaskEmployeeModel model)
         {
-            model.IdTask = Guid.NewGuid();
+            model.IdTaskEmployee = Guid.NewGuid();
             _dbContext.TaskEmployees.Add(MapModelToDBObject(model));
             _dbContext.SaveChanges();
         }
 
         public void UpdateTaskEmployee(TaskEmployeeModel model)
         {
-            var dbObject = _dbContext.TaskEmployees.FirstOrDefault(x => x.IdTask == model.IdTask);
+            var dbObject = _dbContext.TaskEmployees.FirstOrDefault(x => x.IdTaskEmployee == model.IdTaskEmployee);
             if (dbObject != null)
             {
-                dbObject.IdTask = model.IdTask;
+                dbObject.IdTaskEmployee = model.IdTaskEmployee;
+                dbObject.IdEmployee = model.IdEmployee;
                 dbObject.Title = model.Title;
                 dbObject.Priority = model.Priority;
                 dbObject.Description = model.Description;
@@ -82,7 +84,7 @@ namespace MyWorkingEnvironment.Repository
 
         public void DeleteTaskEmployee(Guid id)
         {
-            var dbObject = _dbContext.TaskEmployees.FirstOrDefault(x => x.IdTask == id);
+            var dbObject = _dbContext.TaskEmployees.FirstOrDefault(x => x.IdTaskEmployee == id);
             if (dbObject != null)
             {
                 _dbContext.TaskEmployees.Remove(dbObject);

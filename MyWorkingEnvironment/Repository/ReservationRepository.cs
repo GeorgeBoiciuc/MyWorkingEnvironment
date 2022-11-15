@@ -1,7 +1,6 @@
 ﻿using MyWorkingEnvironment.Data;
 using MyWorkingEnvironment.Models.DBObjects;
 using MyWorkingEnvironment.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace MyWorkingEnvironment.Repository
 {
@@ -25,8 +24,10 @@ namespace MyWorkingEnvironment.Repository
             if (dbobject != null)
             {
                 model.IdReservation = dbobject.IdReservation;
-                model.CheckIn = dbobject.CheckIn;
-                model.CheckOut = dbobject.CheckOut;
+                model.IdEmployee = dbobject.IdEmployee;
+                model.Date = dbobject.Date;
+                model.Start = dbobject.Start;
+                model.End = dbobject.End;
             }
             return model;
         }
@@ -37,8 +38,10 @@ namespace MyWorkingEnvironment.Repository
             if (model != null)
             {
                 dbobject.IdReservation = model.IdReservation;
-                dbobject.CheckIn = model.CheckIn;
-                dbobject.CheckOut = model.CheckOut;
+                dbobject.IdEmployee = model.IdEmployee;
+                dbobject.Date = model.Date;
+                dbobject.Start = model.Start;
+                dbobject.End = model.End;
             }
             return dbobject;
         }
@@ -71,8 +74,10 @@ namespace MyWorkingEnvironment.Repository
             if (dbObject != null)
             {
                 dbObject.IdReservation = model.IdReservation;
-                dbObject.CheckIn = model.CheckIn;
-                dbObject.CheckOut = model.CheckOut;
+                dbObject.IdEmployee = model.IdEmployee;
+                dbObject.Date = model.Date;
+                dbObject.Start = model.Start;
+                dbObject.End = model.End;
                 _dbContext.SaveChanges();
             }
         }

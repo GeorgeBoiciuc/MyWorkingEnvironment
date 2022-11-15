@@ -18,15 +18,13 @@ namespace MyWorkingEnvironment.Controllers
         // GET: MeetingRoomController
         public ActionResult Index()
         {
-            var list = _meetingRoomRepository.GetAllMeetingRooms();
-            return View(list);
+            return View(_meetingRoomRepository.GetAllMeetingRooms());
         }
 
         // GET: MeetingRoomController/Details/5
         public ActionResult Details(Guid id)
         {
-            var model = _meetingRoomRepository.GetMeetingRoomById(id);
-            return View("DetailsMeetingRoom", model);
+            return View("DetailsMeetingRoom", _meetingRoomRepository.GetMeetingRoomById(id));
         }
 
         // GET: MeetingRoomController/Create
@@ -60,8 +58,7 @@ namespace MyWorkingEnvironment.Controllers
         // GET: MeetingRoomController/Edit/5
         public ActionResult Edit(Guid id)
         {
-            var model = _meetingRoomRepository.GetMeetingRoomById(id);
-            return View("EditMeetingRoom", model);
+            return View("EditMeetingRoom", _meetingRoomRepository.GetMeetingRoomById(id));
         }
 
         // POST: MeetingRoomController/Edit/5
@@ -89,8 +86,7 @@ namespace MyWorkingEnvironment.Controllers
         // GET: MeetingRoomController/Delete/5
         public ActionResult Delete(Guid id)
         {
-            var model = _meetingRoomRepository.GetMeetingRoomById(id);
-            return View("DeleteMeetingRoom", model);
+            return View("DeleteMeetingRoom", _meetingRoomRepository.GetMeetingRoomById(id));
         }
 
         // POST: MeetingRoomController/Delete/5
@@ -105,7 +101,7 @@ namespace MyWorkingEnvironment.Controllers
             }
             catch
             {
-                return RedirectToAction("Delete", id);
+                return View("Delete", id);
             }
         }
     }

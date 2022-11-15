@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MyWorkingEnvironment.Data;
 using MyWorkingEnvironment.Models;
 using MyWorkingEnvironment.Repository;
@@ -8,30 +9,33 @@ namespace MyWorkingEnvironment.Controllers
 {
     public class TaskEmployeeController : Controller
     {
+        private EmployeeRepository _employeeRepository;
         private TaskEmployeeRepository _taskEmployeeRepository;
 
         public TaskEmployeeController(ApplicationDbContext dbContext)
         {
+            _employeeRepository = new EmployeeRepository(dbContext);
             _taskEmployeeRepository = new TaskEmployeeRepository(dbContext);
         }
 
         // GET: TaskEmployeeController
         public ActionResult Index()
         {
-            var list = _taskEmployeeRepository.GetAllTaskEmployees();
-            return View(list);
+            return View(_taskEmployeeRepository.GetAllTaskEmployees());
         }
 
         // GET: TaskEmployeeController/Details/5
         public ActionResult Details(Guid id)
         {
-            var model = _taskEmployeeRepository.GetTaskEmployeeById(id);
-            return View("DetailsTaskEmployee", model);
+            return View("DetailsTaskEmployee", _taskEmployeeRepository.GetTaskEmployeeById(id));
         }
 
         // GET: TaskEmployeeController/Create
         public ActionResult Create()
         {
+            var employees = _employeeRepository.GetAllEmployees();
+            var employeeList = employees.Select(x => new SelectListItem(x.FirstName + " " + x.LastName, x.IdEmployee.ToString()));
+            ViewBag.EmployeeList = employeeList;
             return View("CreateTaskEmployee");
         }
 
@@ -49,7 +53,7 @@ namespace MyWorkingEnvironment.Controllers
                 {
                     _taskEmployeeRepository.InsertTaskEmployee(model);
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -60,8 +64,10 @@ namespace MyWorkingEnvironment.Controllers
         // GET: TaskEmployeeController/Edit/5
         public ActionResult Edit(Guid id)
         {
-            var model = _taskEmployeeRepository.GetTaskEmployeeById(id);
-            return View("EditTaskEmployee", model);
+            var employees = _employeeRepository.GetAllEmployees();
+            var employeeList = employees.Select(x => new SelectListItem(x.FirstName + " " + x.LastName, x.IdEmployee.ToString()));
+            ViewBag.EmployeeList = employeeList;
+            return View("EditTaskEmployee", _taskEmployeeRepository.GetTaskEmployeeById(id));
         }
 
         // POST: TaskEmployeeController/Edit/5
@@ -72,8 +78,7 @@ namespace MyWorkingEnvironment.Controllers
             try
             {
                 var model = new TaskEmployeeModel();
-                var task = TryUpdateModelAsync(model); //modelul nu ia id-ul, iar aceasta ramane null
-                //model.IdTask = id;
+                var task = TryUpdateModelAsync(model);
                 task.Wait();
                 if (task.Result)
                 {
@@ -90,8 +95,7 @@ namespace MyWorkingEnvironment.Controllers
         // GET: TaskEmployeeController/Delete/5
         public ActionResult Delete(Guid id)
         {
-            var model = _taskEmployeeRepository.GetTaskEmployeeById(id);
-            return View("DeleteTaskEmployee", model);
+            return View("DeleteTaskEmployee", _taskEmployeeRepository.GetTaskEmployeeById(id));
         }
 
         // POST: TaskEmployeeController/Delete/5

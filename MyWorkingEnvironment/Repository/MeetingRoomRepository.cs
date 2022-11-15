@@ -1,7 +1,6 @@
 ﻿using MyWorkingEnvironment.Data;
 using MyWorkingEnvironment.Models.DBObjects;
 using MyWorkingEnvironment.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace MyWorkingEnvironment.Repository
 {
@@ -26,6 +25,8 @@ namespace MyWorkingEnvironment.Repository
             {
                 model.IdMeetingRoom = dbobject.IdMeetingRoom;
                 model.Name = dbobject.Name;
+                model.Floor = dbobject.Floor;
+                model.Capacity = dbobject.Capacity;
             }
             return model;
         }
@@ -37,6 +38,8 @@ namespace MyWorkingEnvironment.Repository
             {
                 dbobject.IdMeetingRoom = model.IdMeetingRoom;
                 dbobject.Name = model.Name;
+                dbobject.Floor = model.Floor;
+                dbobject.Capacity = model.Capacity;
             }
             return dbobject;
         }
@@ -70,6 +73,8 @@ namespace MyWorkingEnvironment.Repository
             {
                 dbObject.IdMeetingRoom = model.IdMeetingRoom;
                 dbObject.Name = model.Name;
+                dbObject.Floor = model.Floor;
+                dbObject.Capacity = model.Capacity;
                 _dbContext.SaveChanges();
             }
         }

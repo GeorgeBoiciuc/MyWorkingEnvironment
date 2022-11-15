@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MyWorkingEnvironment.Data;
 using MyWorkingEnvironment.Models;
 using MyWorkingEnvironment.Repository;
@@ -8,30 +9,33 @@ namespace MyWorkingEnvironment.Controllers
 {
     public class ReservationController : Controller
     {
+        private EmployeeRepository _employeeRepository;
         private ReservationRepository _reservationRepository;
 
         public ReservationController(ApplicationDbContext dbContext)
         {
-            _reservationRepository = new ReservationRepository(dbContext);    
+            _employeeRepository = new EmployeeRepository(dbContext);
+            _reservationRepository = new ReservationRepository(dbContext);
         }
 
         // GET: ReservationController
         public ActionResult Index()
         {
-            var list = _reservationRepository.GetAllReservations();
-            return View(list);
+            return View(_reservationRepository.GetAllReservations());
         }
 
         // GET: ReservationController/Details/5
         public ActionResult Details(Guid id)
         {
-            var model = _reservationRepository.GetReservationById(id);
-            return View("DetailsReservation", model);
+            return View("DetailsReservation", _reservationRepository.GetReservationById(id));
         }
 
         // GET: ReservationController/Create
         public ActionResult Create()
         {
+            var employees = _employeeRepository.GetAllEmployees();
+            var employeeList = employees.Select(x => new SelectListItem(x.FirstName + " " + x.LastName, x.IdEmployee.ToString()));
+            ViewBag.EmployeeList = employeeList;
             return View("CreateReservation");
         }
 
@@ -49,7 +53,7 @@ namespace MyWorkingEnvironment.Controllers
                 {
                     _reservationRepository.InsertReservation(model);
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -60,8 +64,10 @@ namespace MyWorkingEnvironment.Controllers
         // GET: ReservationController/Edit/5
         public ActionResult Edit(Guid id)
         {
-            var model = _reservationRepository.GetReservationById(id);
-            return View("EditReservation", model);
+            var employees = _employeeRepository.GetAllEmployees();
+            var employeeList = employees.Select(x => new SelectListItem(x.FirstName + " " + x.LastName, x.IdEmployee.ToString()));
+            ViewBag.EmployeeList = employeeList;
+            return View("EditReservation", _reservationRepository.GetReservationById(id));
         }
 
         // POST: ReservationController/Edit/5
@@ -89,8 +95,7 @@ namespace MyWorkingEnvironment.Controllers
         // GET: ReservationController/Delete/5
         public ActionResult Delete(Guid id)
         {
-            var model = _reservationRepository.GetReservationById(id);
-            return View("DeleteReservation", model);
+            return View("DeleteReservation", _reservationRepository.GetReservationById(id));
         }
 
         // POST: ReservationController/Delete/5

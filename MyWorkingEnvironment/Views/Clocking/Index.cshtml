@@ -23,39 +23,44 @@
                 @Html.DisplayNameFor(model => model.Type)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CheckIn)
+                @Html.DisplayNameFor(model => model.Date)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CheckOut)
+                @Html.DisplayNameFor(model => model.In)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Out)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
- @*               <td>
-                    @Html.DisplayFor(modelItem => item.IdClocking)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdEmployee)
-                </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.Type)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CheckIn)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CheckOut)
-                </td>
-                <td>
+@foreach (var item in Model) {
+        <tr>
+@*            <td>
+                @Html.DisplayFor(modelItem => item.IdClocking)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEmployee)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.In)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Out)
+            </td>
+            <td>
                     @Html.ActionLink("Edit", "Edit", new {  id=item.IdClocking  }) |
                     @Html.ActionLink("Details", "Details", new {  id=item.IdClocking  }) |
                     @Html.ActionLink("Delete", "Delete", new {  id=item.IdClocking  })
-                </td>
-            </tr>
-        }
+            </td>
+        </tr>
+}
     </tbody>
 </table>

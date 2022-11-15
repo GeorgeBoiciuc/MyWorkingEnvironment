@@ -13,14 +13,14 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-@*            <div hidden class="form-group">
+@*            <div class="form-group">
                 <label asp-for="IdClocking" class="control-label"></label>
                 <input asp-for="IdClocking" class="form-control" />
                 <span asp-validation-for="IdClocking" class="text-danger"></span>
             </div>*@
             <div class="form-group">
                 <label asp-for="IdEmployee" hidden class="control-label"></label>
-                @*<input asp-for="IdEmployee" hidden class="form-control" />*@
+                @*<input asp-for="IdEmployee" class="form-control" />*@
                 @Html.DropDownList("IdEmployee", new SelectList(@ViewBag.EmployeeList, "Value", "Text"), "Select Employee", new {@class="form-control"})
                 <span asp-validation-for="IdEmployee" class="text-danger"></span>
             </div>
@@ -31,14 +31,19 @@
                 <span asp-validation-for="Type" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CheckIn" class="control-label"></label>
-                <input asp-for="CheckIn" class="form-control" />
-                <span asp-validation-for="CheckIn" class="text-danger"></span>
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CheckOut" class="control-label"></label>
-                <input asp-for="CheckOut" class="form-control" />
-                <span asp-validation-for="CheckOut" class="text-danger"></span>
+                <label asp-for="In" class="control-label"></label>
+                <input asp-for="In" class="form-control" />
+                <span asp-validation-for="In" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Out" class="control-label"></label>
+                <input asp-for="Out" class="form-control" />
+                <span asp-validation-for="Out" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

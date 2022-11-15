@@ -7,11 +7,9 @@ namespace MyWorkingEnvironment.Repository
     public class ClockingRepository
     {
         private ApplicationDbContext _dbContext;
-        private EmployeeRepository _employeeRepository;
 
         public ClockingRepository()
         {
-            _employeeRepository = new EmployeeRepository();
             _dbContext = new ApplicationDbContext();
         }
 
@@ -28,10 +26,10 @@ namespace MyWorkingEnvironment.Repository
                 model.IdClocking = dbobject.IdClocking;
                 model.IdEmployee = dbobject.IdEmployee;
                 model.Type = dbobject.Type;
-                model.CheckIn = dbobject.CheckIn;
-                model.CheckOut = dbobject.CheckOut;
+                model.Date = dbobject.Date;
+                model.In = dbobject.In;
+                model.Out = dbobject.Out;
             }
-
             return model;
         }
 
@@ -43,10 +41,10 @@ namespace MyWorkingEnvironment.Repository
                 dbobject.IdClocking = model.IdClocking;
                 dbobject.IdEmployee = model.IdEmployee;
                 dbobject.Type = model.Type;
-                dbobject.CheckIn = model.CheckIn;
-                dbobject.CheckOut = model.CheckOut;
+                dbobject.Date = model.Date;
+                dbobject.In = model.In;
+                dbobject.Out = model.Out;
             }
-
             return dbobject;
         }
 
@@ -80,8 +78,9 @@ namespace MyWorkingEnvironment.Repository
                 dbObject.IdClocking = model.IdClocking;
                 dbObject.IdEmployee = model.IdEmployee;
                 dbObject.Type = model.Type;
-                dbObject.CheckIn = model.CheckIn;
-                dbObject.CheckOut = model.CheckOut;
+                dbObject.Date = model.Date;
+                dbObject.In = model.In;
+                dbObject.Out = model.Out;
                 _dbContext.SaveChanges();
             }
         }

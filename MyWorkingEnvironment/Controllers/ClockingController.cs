@@ -9,8 +9,8 @@ namespace MyWorkingEnvironment.Controllers
 {
     public class ClockingController : Controller
     {
-        private ClockingRepository _clockingRepository;
         private EmployeeRepository _employeeRepository;
+        private ClockingRepository _clockingRepository;
 
         public ClockingController(ApplicationDbContext dbContext)
         {
@@ -21,23 +21,20 @@ namespace MyWorkingEnvironment.Controllers
         // GET: ClockingController
         public ActionResult Index()
         {
-            var list = _clockingRepository.GetAllClockings();
-            return View(list);
+            return View(_clockingRepository.GetAllClockings());
         }
 
         // GET: ClockingController/Details/5
         public ActionResult Details(Guid id)
         {
-            var model = _clockingRepository.GetClokingById(id);
-            return View("DetailsClocking", model);
+            return View("DetailsClocking", _clockingRepository.GetClokingById(id));
         }
 
         // GET: ClockingController/Create
         public ActionResult Create()
         {
-            // IdEmployee trebuie sa vina in functie de cine este logat pe cont
             var employees = _employeeRepository.GetAllEmployees();
-            var employeeList = employees.Select(x => new SelectListItem( x.FirstName + " " + x.LastName, x.IdEmployee.ToString()));
+            var employeeList = employees.Select(x => new SelectListItem(x.FirstName + " " + x.LastName, x.IdEmployee.ToString()));
             ViewBag.EmployeeList = employeeList;
             return View("CreateClocking");
         }
@@ -67,8 +64,7 @@ namespace MyWorkingEnvironment.Controllers
         // GET: ClockingController/Edit/5
         public ActionResult Edit(Guid id)
         {
-            var model = _clockingRepository.GetClokingById(id);
-            return View("EditClocking", model);
+            return View("EditClocking", _clockingRepository.GetClokingById(id));
         }
 
         // POST: ClockingController/Edit/5
@@ -96,8 +92,7 @@ namespace MyWorkingEnvironment.Controllers
         // GET: ClockingController/Delete/5
         public ActionResult Delete(Guid id)
         {
-            var model = _clockingRepository.GetClokingById(id);
-            return View("DeleteClocking", model);
+            return View("DeleteClocking", _clockingRepository.GetClokingById(id));
         }
 
         // POST: ClockingController/Delete/5

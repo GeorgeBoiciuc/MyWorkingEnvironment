@@ -1,19 +1,15 @@
 ﻿using MyWorkingEnvironment.Data;
-using MyWorkingEnvironment.Models;
 using MyWorkingEnvironment.Models.DBObjects;
+using MyWorkingEnvironment.Models;
 
 namespace MyWorkingEnvironment.Repository
 {
     public class EmployeeRepository
     {
         private ApplicationDbContext _DbContext;
-        private TaskEmployeeRepository _taskEmployeeRepository;
-        private ReservationRepository _reservationReposotiry;
 
         public EmployeeRepository()
         {
-            _taskEmployeeRepository = new TaskEmployeeRepository();
-            _reservationReposotiry = new ReservationRepository();
             _DbContext = new ApplicationDbContext();
         }
 
@@ -28,11 +24,11 @@ namespace MyWorkingEnvironment.Repository
             if (dbObject != null)
             {
                 model.IdEmployee = dbObject.IdEmployee;
-                model.IdTask = dbObject.IdTask;
-                model.IdReservation = dbObject.IdReservation;
                 model.FirstName = dbObject.FirstName;
                 model.LastName = dbObject.LastName;
-                model.StartDate = dbObject.StartDate;
+                model.Title = dbObject.Title;
+                model.Email = dbObject.Email;
+                model.JoinDate = dbObject.JoinDate;
                 model.VacationDays = dbObject.VacationDays;
             }
             return model;
@@ -44,11 +40,11 @@ namespace MyWorkingEnvironment.Repository
             if (model != null)
             {
                 dbObject.IdEmployee = model.IdEmployee;
-                dbObject.IdTask = model.IdTask;
-                dbObject.IdReservation = model.IdReservation;
                 dbObject.FirstName = model.FirstName;
                 dbObject.LastName = model.LastName;
-                dbObject.StartDate = model.StartDate;
+                dbObject.Title = model.Title;
+                dbObject.Email = model.Email;
+                dbObject.JoinDate = model.JoinDate;
                 dbObject.VacationDays = model.VacationDays;
             }
             return dbObject;
@@ -82,11 +78,11 @@ namespace MyWorkingEnvironment.Repository
             if (dbObject != null)
             {
                 dbObject.IdEmployee = model.IdEmployee;
-                dbObject.IdTask = model.IdTask;
-                dbObject.IdReservation = model.IdReservation;
                 dbObject.FirstName = model.FirstName;
                 dbObject.LastName = model.LastName;
-                dbObject.StartDate = model.StartDate;
+                dbObject.Title = model.Title;
+                dbObject.Email = model.Email;
+                dbObject.JoinDate = model.JoinDate;
                 dbObject.VacationDays = model.VacationDays;
                 _DbContext.SaveChanges();
             }
@@ -97,28 +93,6 @@ namespace MyWorkingEnvironment.Repository
             var dbObject = _DbContext.Employees.FirstOrDefault(x => x.IdEmployee == id);
             if (dbObject != null)
             {
-                //var tasks = _DbContext.TaskEmployees.Where(x => x.IdTask == dbObject.IdTask);
-                //_taskEmployeeRepository.DeleteTaskEmployee((Guid)dbObject.IdTask);
-                //_reservationReposotiry.DeleteReservation((Guid)dbObject.IdReservation);
-
-                //var reservations = _reservationReposotiry.GetReservationById((Guid)dbObject.IdReservation);
-                //var reservations = _DbContext.Reservations.Where(x => x.IdReservation == dbObject.IdReservation);
-                //foreach (var reservation in reservations)
-                //{
-                //    _DbContext.Reservations.Remove(reservation);
-                //}
-
-                var tasks = _DbContext.TaskEmployees.FirstOrDefault(x => x.IdTask == dbObject.IdTask);
-                //foreach (var task in tasks)
-                //{
-                    _DbContext.TaskEmployees.Remove(tasks);
-                //}
-                var reservations = _DbContext.Reservations.FirstOrDefault(x => x.IdReservation == dbObject.IdReservation);
-                //foreach (var reservation in reservations)
-                //{
-                    _DbContext.Reservations.Remove(reservations);
-                //}
-
                 _DbContext.Employees.Remove(dbObject);
                 _DbContext.SaveChanges();
             }

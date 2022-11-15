@@ -8,17 +8,20 @@ namespace MyWorkingEnvironment.Models.DBObjects
         public Employee()
         {
             Clockings = new HashSet<Clocking>();
+            Reservations = new HashSet<Reservation>();
+            TaskEmployees = new HashSet<TaskEmployee>();
         }
 
         public Guid IdEmployee { get; set; }
-        public Guid? IdTask { get; set; }
-        public Guid? IdReservation { get; set; }
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
-        public DateTime StartDate { get; set; }
-        public int VacationDays { get; set; }
+        public string? Title { get; set; }
+        public string Email { get; set; } = null!;
+        public DateTime? JoinDate { get; set; }
+        public int? VacationDays { get; set; }
 
-        public virtual Reservation IdReservationNavigation { get; set; } = null!;
         public virtual ICollection<Clocking> Clockings { get; set; }
+        public virtual ICollection<Reservation> Reservations { get; set; }
+        public virtual ICollection<TaskEmployee> TaskEmployees { get; set; }
     }
 }

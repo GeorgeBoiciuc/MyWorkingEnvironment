@@ -13,11 +13,17 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-@*            <div hidden class="form-group">
-                <label asp-for="IdTask" class="control-label"></label>
-                <input asp-for="IdTask" class="form-control" />
-                <span asp-validation-for="IdTask" class="text-danger"></span>
+@*            <div class="form-group">
+                <label asp-for="IdTaskEmployee" class="control-label"></label>
+                <input asp-for="IdTaskEmployee" class="form-control" />
+                <span asp-validation-for="IdTaskEmployee" class="text-danger"></span>
             </div>*@
+            <div class="form-group">
+                <label asp-for="IdEmployee" hidden class="control-label"></label>
+                @*<input asp-for="IdEmployee" class="form-control" />*@
+                @Html.DropDownList("IdEmployee", new SelectList(@ViewBag.EmployeeList, "Value", "Text"), "Select Employee", new {@class="form-control"})
+                <span asp-validation-for="IdEmployee" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
