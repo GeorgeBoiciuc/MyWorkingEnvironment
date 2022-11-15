@@ -12,14 +12,12 @@ namespace MyWorkingEnvironment.Controllers
     {
         private ReservationRepository _reservationRepository;
         private MeetingRoomRepository _meetingRoomRepository;
-        private EmployeeRepository _employeeRepository;
         private MeetingRoomReservationRepository _meetingRoomReservationRepository;
 
         public MeetingRoomReservationController(ApplicationDbContext dbContext)
         {
             _reservationRepository = new ReservationRepository(dbContext);
             _meetingRoomRepository = new MeetingRoomRepository(dbContext);
-            _employeeRepository = new EmployeeRepository(dbContext);
             _meetingRoomReservationRepository = new MeetingRoomReservationRepository(dbContext);
         }
 
@@ -47,10 +45,10 @@ namespace MyWorkingEnvironment.Controllers
         // GET: MeetingRoomReservationController/Create
         public ActionResult Create()
         {
-            var employees = _employeeRepository.GetAllEmployees();
-            var employeeList = employees.Select(x => new SelectListItem(x.FirstName + " " + x.LastName, x.IdEmployee.ToString()));
-            ViewBag.EmployeeList = employeeList;
-
+            var reservations = _reservationRepository.GetAllReservations();
+            var reservationList = reservations.Select(x => new SelectListItem(x.Date.ToShortDateString() + " " + x.Start.ToShortTimeString() + "-" + x.End.ToShortTimeString(),
+                                                                              x.IdReservation.ToString()));
+            ViewBag.ReservationList = reservationList;
             var meetingRooms = _meetingRoomRepository.GetAllMeetingRooms();
             var meetingRoomList = meetingRooms.Select(x => new SelectListItem(x.Name, x.IdMeetingRoom.ToString()));
             ViewBag.MeetingRoomList = meetingRoomList;
@@ -65,23 +63,10 @@ namespace MyWorkingEnvironment.Controllers
             try
             {
                 var model = new MeetingRoomReservationModel();
-                var viewModel = new MeetingRoomReservationViewModel(model, _reservationRepository, _meetingRoomRepository);
-                var task = TryUpdateModelAsync(viewModel);
+                var task = TryUpdateModelAsync(model);
                 task.Wait();
                 if (task.Result)
                 {
-                    var reservationModel = new ReservationModel()
-                    {
-                        IdReservation = viewModel.IdReservation,
-                        IdEmployee = viewModel.IdEmployee,
-                        Date = viewModel.Date,
-                        End = viewModel.End,
-                        Start = viewModel.Start
-                    };
-                    _reservationRepository.InsertReservation(reservationModel);
-
-                    model.IdReservation = viewModel.IdReservation;
-                    model.IdMeetingRoom = viewModel.IdMeetingRoom;
                     _meetingRoomReservationRepository.InsertMeetingRoomReservation(model);
                 }
                 return RedirectToAction("Index");
@@ -95,7 +80,14 @@ namespace MyWorkingEnvironment.Controllers
         // GET: MeetingRoomReservationController/Edit/5
         public ActionResult Edit(Guid id)
         {
-            return View();
+            var reservations = _reservationRepository.GetAllReservations();
+            var reservationList = reservations.Select(x => new SelectListItem(x.Date.ToShortDateString() + " " + x.Start.ToShortTimeString() + "-" + x.End.ToShortTimeString(),
+                                                                              x.IdReservation.ToString()));
+            ViewBag.ReservationList = reservationList;
+            var meetingRooms = _meetingRoomRepository.GetAllMeetingRooms();
+            var meetingRoomList = meetingRooms.Select(x => new SelectListItem(x.Name, x.IdMeetingRoom.ToString()));
+            ViewBag.MeetingRoomList = meetingRoomList;
+            return View("EditMeetingRoomReservation", _meetingRoomReservationRepository.GetMeetingRoomReservationById(id));
         }
 
         // POST: MeetingRoomReservationController/Edit/5
@@ -105,18 +97,25 @@ namespace MyWorkingEnvironment.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var model = new MeetingRoomReservationModel();
+                var task = TryUpdateModelAsync(model);
+                task.Wait();
+                if (task.Result)
+                {
+                    _meetingRoomReservationRepository.UpdateMeetingRoomReservation(model);
+                }
+                return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return RedirectToAction("Edit", id);
             }
         }
 
         // GET: MeetingRoomReservationController/Delete/5
         public ActionResult Delete(Guid id)
         {
-            return View();
+            return View("DeleteMeetingRoomReservation",_meetingRoomReservationRepository.GetMeetingRoomReservationById(id));
         }
 
         // POST: MeetingRoomReservationController/Delete/5
@@ -126,11 +125,12 @@ namespace MyWorkingEnvironment.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                _meetingRoomReservationRepository.DeleteMeetingRoomReservation(id);
+                return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return RedirectToAction("Delete", id);
             }
         }
     }

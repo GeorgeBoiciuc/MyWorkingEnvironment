@@ -30,7 +30,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
+                @*<input asp-for="Title" class="form-control" />*@
+                @Html.DropDownList("Title", new SelectList(Enum.GetValues(typeof(JobTitle))), "Select JobTitle", new { @class = "form-control"})
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">

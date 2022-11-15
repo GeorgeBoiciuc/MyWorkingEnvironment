@@ -71,8 +71,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVldGluZ1Jvb21SZXNlcnZhdGlvblxDcmVhdGVNZWV0aW5nUm9vbVJlc2VydmF0aW9uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/George/Desktop/Scoala Informala/Proiect Final/MyWorkingEnvironment/Views/MeetingRoomReservation/DeleteMeetingRoomReservation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVldGluZ1Jvb21SZXNlcnZhdGlvblxEZWxldGVNZWV0aW5nUm9vbVJlc2VydmF0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/George/Desktop/Scoala Informala/Proiect Final/MyWorkingEnvironment/Views/MeetingRoomReservation/DetailsMeetingRoomReservation.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVldGluZ1Jvb21SZXNlcnZhdGlvblxEZXRhaWxzTWVldGluZ1Jvb21SZXNlcnZhdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/George/Desktop/Scoala Informala/Proiect Final/MyWorkingEnvironment/Views/MeetingRoomReservation/EditMeetingRoomReservation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVldGluZ1Jvb21SZXNlcnZhdGlvblxFZGl0TWVldGluZ1Jvb21SZXNlcnZhdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/George/Desktop/Scoala Informala/Proiect Final/MyWorkingEnvironment/Views/MeetingRoomReservation/Index.cshtml]

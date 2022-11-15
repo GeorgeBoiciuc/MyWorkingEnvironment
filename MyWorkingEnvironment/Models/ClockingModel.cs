@@ -7,10 +7,13 @@ namespace MyWorkingEnvironment.Models
         public Guid IdClocking { get; set; }
         public Guid? IdEmployee { get; set; }
         public string Type { get; set; } = null!;
+        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}")]
         public DateTime Date { get; set; }
+        [DataType(DataType.Time)]
         [DisplayFormat(DataFormatString = "{0:HH:mm}")]
         public DateTime In { get; set; }
+        [DataType(DataType.Time)]
         [DisplayFormat(DataFormatString = "{0:HH:mm}")]
         public DateTime Out { get; set; }
     }

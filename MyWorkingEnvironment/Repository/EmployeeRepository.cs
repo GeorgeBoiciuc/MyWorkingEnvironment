@@ -93,8 +93,48 @@ namespace MyWorkingEnvironment.Repository
             var dbObject = _DbContext.Employees.FirstOrDefault(x => x.IdEmployee == id);
             if (dbObject != null)
             {
+                DeleteClockingsWithIdEmployee(dbObject.IdEmployee);
+                DeleteTasksWithIdEmployee(dbObject.IdEmployee);
+                DeleteReservationsByIdEmployee(dbObject.IdEmployee);
                 _DbContext.Employees.Remove(dbObject);
                 _DbContext.SaveChanges();
+            }
+        }
+
+        private void DeleteClockingsWithIdEmployee(Guid id)
+        {
+            var clockings = _DbContext.Clockings.Where(x => x.IdEmployee == id);
+            foreach (var clocking in clockings)
+            {
+                _DbContext.Clockings.Remove(clocking);
+            }
+        }
+
+        private void DeleteTasksWithIdEmployee(Guid id)
+        {
+            var tasks = _DbContext.TaskEmployees.Where(x => x.IdEmployee == id);
+            foreach (var task in tasks)
+            {
+                _DbContext.TaskEmployees.Remove(task);
+            }
+        }
+
+        private void DeleteReservationsByIdEmployee(Guid id)
+        {
+            var reservations = _DbContext.Reservations.Where(x => x.IdEmployee == id);
+            foreach (var reservation in reservations)
+            {
+                DeleteMeetingRoomReservationsWithIdEmployee(reservation.IdReservation);                
+                _DbContext.Reservations.Remove(reservation);
+            }
+        }
+
+        private void DeleteMeetingRoomReservationsWithIdEmployee(Guid id)
+        {
+            var meetingRoomReservations = _DbContext.MeetingRoomReservations.Where(x => x.IdReservation == id);
+            foreach (var meetingRoomReservation in meetingRoomReservations)
+            {
+                _DbContext.MeetingRoomReservations.Remove(meetingRoomReservation);
             }
         }
     }
