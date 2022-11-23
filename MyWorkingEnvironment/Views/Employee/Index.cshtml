@@ -28,17 +28,17 @@
             <th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
-            <th>
+@*            <th>
                 @Html.DisplayNameFor(model => model.JoinDate)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.VacationDays)
-            </th>
+            </th>*@
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.OrderBy(x=>x.FirstName)) {
         <tr>
 @*            <td>
                 @Html.DisplayFor(modelItem => item.IdEmployee)
@@ -55,12 +55,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
-            <td>
+@*            <td>
                 @Html.DisplayFor(modelItem => item.JoinDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.VacationDays)
-            </td>
+            </td>*@
             <td>
                     @Html.ActionLink("Edit", "Edit", new {  id=item.IdEmployee  }) |
                     @Html.ActionLink("Details", "Details", new {  id=item.IdEmployee  }) |

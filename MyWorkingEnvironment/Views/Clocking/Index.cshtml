@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MyWorkingEnvironment.Models.ClockingModel>
+﻿@model IEnumerable<MyWorkingEnvironment.ViewModels.ClockingsEmployeeViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -19,6 +19,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.IdEmployee)
             </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Type)
             </th>
@@ -44,6 +50,12 @@
                 @Html.DisplayFor(modelItem => item.IdEmployee)
             </td>*@
             <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Type)
             </td>
             <td>
@@ -56,9 +68,9 @@
                 @Html.DisplayFor(modelItem => item.Out)
             </td>
             <td>
-                    @Html.ActionLink("Edit", "Edit", new {  id=item.IdClocking  }) |
-                    @Html.ActionLink("Details", "Details", new {  id=item.IdClocking  }) |
-                    @Html.ActionLink("Delete", "Delete", new {  id=item.IdClocking  })
+                @Html.ActionLink("Edit", "Edit", new {  id=item.IdClocking  }) |
+                @Html.ActionLink("Details", "Details", new {  id=item.IdClocking  }) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.IdClocking  })
             </td>
         </tr>
 }

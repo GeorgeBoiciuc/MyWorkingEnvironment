@@ -33,9 +33,7 @@ namespace MyWorkingEnvironment.Controllers
         // GET: TaskEmployeeController/Create
         public ActionResult Create()
         {
-            var employees = _employeeRepository.GetAllEmployees();
-            var employeeList = employees.Select(x => new SelectListItem(x.FirstName + " " + x.LastName, x.IdEmployee.ToString()));
-            ViewBag.EmployeeList = employeeList;
+            SetUpEmployeeListViewBag();
             return View("CreateTaskEmployee");
         }
 
@@ -64,9 +62,7 @@ namespace MyWorkingEnvironment.Controllers
         // GET: TaskEmployeeController/Edit/5
         public ActionResult Edit(Guid id)
         {
-            var employees = _employeeRepository.GetAllEmployees();
-            var employeeList = employees.Select(x => new SelectListItem(x.FirstName + " " + x.LastName, x.IdEmployee.ToString()));
-            ViewBag.EmployeeList = employeeList;
+            SetUpEmployeeListViewBag();
             return View("EditTaskEmployee", _taskEmployeeRepository.GetTaskEmployeeById(id));
         }
 
@@ -112,6 +108,13 @@ namespace MyWorkingEnvironment.Controllers
             {
                 return RedirectToAction("Delete", id);
             }
+        }
+
+        private void SetUpEmployeeListViewBag()
+        {
+            var employees = _employeeRepository.GetAllEmployees();
+            var employeeList = employees.Select(x => new SelectListItem(x.FirstName + " " + x.LastName, x.IdEmployee.ToString()));
+            ViewBag.EmployeeList = employeeList;
         }
     }
 }

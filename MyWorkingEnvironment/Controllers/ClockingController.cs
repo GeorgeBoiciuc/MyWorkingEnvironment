@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using MyWorkingEnvironment.Data;
 using MyWorkingEnvironment.Models;
 using MyWorkingEnvironment.Repository;
+using MyWorkingEnvironment.ViewModels;
 
 namespace MyWorkingEnvironment.Controllers
 {
@@ -21,7 +22,13 @@ namespace MyWorkingEnvironment.Controllers
         // GET: ClockingController
         public ActionResult Index()
         {
-            return View(_clockingRepository.GetAllClockings());
+            var list = _clockingRepository.GetAllClockings();
+            var viewModelList = new List<ClockingsEmployeeViewModel>();
+            foreach (var model in list)
+            {
+                viewModelList.Add(new ClockingsEmployeeViewModel(model, _employeeRepository));
+            }
+            return View(viewModelList);
         }
 
         // GET: ClockingController/Details/5
