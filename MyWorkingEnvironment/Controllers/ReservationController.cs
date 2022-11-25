@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MyWorkingEnvironment.Data;
 using MyWorkingEnvironment.Models;
 using MyWorkingEnvironment.Repository;
+using System.Data;
 
 namespace MyWorkingEnvironment.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ReservationController : Controller
     {
         private EmployeeRepository _employeeRepository;
@@ -19,18 +22,21 @@ namespace MyWorkingEnvironment.Controllers
         }
 
         // GET: ReservationController
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             return View(_reservationRepository.GetAllReservations());
         }
 
         // GET: ReservationController/Details/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Details(Guid id)
         {
             return View("DetailsReservation", _reservationRepository.GetReservationById(id));
         }
 
         // GET: ReservationController/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             var employees = _employeeRepository.GetAllEmployees();
@@ -40,6 +46,7 @@ namespace MyWorkingEnvironment.Controllers
         }
 
         // POST: ReservationController/Create
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -62,6 +69,7 @@ namespace MyWorkingEnvironment.Controllers
         }
 
         // GET: ReservationController/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(Guid id)
         {
             var employees = _employeeRepository.GetAllEmployees();
@@ -71,6 +79,7 @@ namespace MyWorkingEnvironment.Controllers
         }
 
         // POST: ReservationController/Edit/5
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Guid id, IFormCollection collection)
@@ -93,12 +102,14 @@ namespace MyWorkingEnvironment.Controllers
         }
 
         // GET: ReservationController/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(Guid id)
         {
             return View("DeleteReservation", _reservationRepository.GetReservationById(id));
         }
 
         // POST: ReservationController/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(Guid id, IFormCollection collection)

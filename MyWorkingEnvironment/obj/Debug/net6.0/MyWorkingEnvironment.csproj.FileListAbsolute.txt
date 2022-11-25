@@ -542,3 +542,4 @@ C:\Users\George\Desktop\Scoala Informala\Proiect Final\MyWorkingEnvironment\obj\
 C:\Users\George\Desktop\Scoala Informala\Proiect Final\MyWorkingEnvironment\obj\Debug\net6.0\MyWorkingEnvironment.pdb
 C:\Users\George\Desktop\Scoala Informala\Proiect Final\MyWorkingEnvironment\obj\Debug\net6.0\MyWorkingEnvironment.genruntimeconfig.cache
 C:\Users\George\Desktop\Scoala Informala\Proiect Final\MyWorkingEnvironment\obj\Debug\net6.0\ref\MyWorkingEnvironment.dll
+C:\Users\George\Desktop\Scoala Informala\Proiect Final\MyWorkingEnvironment\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll

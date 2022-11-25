@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyWorkingEnvironment.Data;
 using MyWorkingEnvironment.Models;
 using MyWorkingEnvironment.Repository;
+using System.Data;
 
 namespace MyWorkingEnvironment.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class MeetingRoomController : Controller
     {
         private MeetingRoomRepository _meetingRoomRepository;

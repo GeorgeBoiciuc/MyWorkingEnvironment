@@ -5,11 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Task List</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Create new task</a>
+    </p>
+}
 <table class="table">
     <thead>
         <tr>
@@ -51,9 +54,12 @@
             </td>
             <td>
                     @Html.ActionLink("Edit", "Edit", new {  id=item.IdTaskEmployee  }) |
-                    @Html.ActionLink("Details", "Details", new {  id=item.IdTaskEmployee  }) |
-                    @Html.ActionLink("Delete", "Delete", new {  id=item.IdTaskEmployee  })
-            </td>
+                    @Html.ActionLink("Details", "Details", new {  id=item.IdTaskEmployee  }) 
+                    @if (User.IsInRole("Admin"))
+                    {
+                    @:| @Html.ActionLink("Delete", "Delete", new { id = item.IdTaskEmployee })
+                    }
+                </td>
         </tr>
 }
     </tbody>

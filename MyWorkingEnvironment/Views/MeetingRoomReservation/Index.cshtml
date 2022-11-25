@@ -5,25 +5,25 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Reservation List</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Create a new appointment</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-@*            <th>
-                @Html.DisplayNameFor(model => model.IdMeetingRoomReservation)
+            @*            <th>
+            @Html.DisplayNameFor(model => model.IdMeetingRoomReservation)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdReservation)
+            @Html.DisplayNameFor(model => model.IdReservation)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdEmployee)
+            @Html.DisplayNameFor(model => model.IdEmployee)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdMeetingRoom)
+            @Html.DisplayNameFor(model => model.IdMeetingRoom)
             </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Date)
@@ -41,38 +41,42 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-@*            <td>
-                @Html.DisplayFor(modelItem => item.IdMeetingRoomReservation)
+        @foreach (var item in Model)
+        {
+            <tr>
+                @*            <td>
+            @Html.DisplayFor(modelItem => item.IdMeetingRoomReservation)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdReservation)
+            @Html.DisplayFor(modelItem => item.IdReservation)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdEmployee)
+            @Html.DisplayFor(modelItem => item.IdEmployee)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdMeetingRoom)
+            @Html.DisplayFor(modelItem => item.IdMeetingRoom)
             </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Start)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.End)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Start)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.End)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
                     @Html.ActionLink("Edit", "Edit", new {  id=item.IdMeetingRoomReservation }) |
-                    @Html.ActionLink("Details", "Details", new {  id=item.IdMeetingRoomReservation  }) |
-                @Html.ActionLink("Delete", "Delete", new {  id=item.IdMeetingRoomReservation  })
-            </td>
-        </tr>
-}
+                    @Html.ActionLink("Details", "Details", new {  id=item.IdMeetingRoomReservation  })
+                    @if (User.IsInRole("Admin"))
+                    {
+                        @:|  @Html.ActionLink("Delete", "Delete", new {  id=item.IdMeetingRoomReservation  })
+                    }
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

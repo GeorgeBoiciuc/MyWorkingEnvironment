@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MyWorkingEnvironment.Data;
@@ -8,6 +9,7 @@ using MyWorkingEnvironment.ViewModels;
 
 namespace MyWorkingEnvironment.Controllers
 {
+    [Authorize(Roles = "User, Admin")]
     public class ClockingController : Controller
     {
         private EmployeeRepository _employeeRepository;
@@ -20,6 +22,7 @@ namespace MyWorkingEnvironment.Controllers
         }
 
         // GET: ClockingController
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Index()
         {
             var list = _clockingRepository.GetAllClockings();
@@ -32,12 +35,14 @@ namespace MyWorkingEnvironment.Controllers
         }
 
         // GET: ClockingController/Details/5
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Details(Guid id)
         {
             return View("DetailsClocking", _clockingRepository.GetClokingById(id));
         }
 
         // GET: ClockingController/Create
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Create()
         {
             var employees = _employeeRepository.GetAllEmployees();
@@ -47,6 +52,7 @@ namespace MyWorkingEnvironment.Controllers
         }
 
         // POST: ClockingController/Create
+        [Authorize(Roles = "User, Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -69,12 +75,14 @@ namespace MyWorkingEnvironment.Controllers
         }
 
         // GET: ClockingController/Edit/5
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Edit(Guid id)
         {
             return View("EditClocking", _clockingRepository.GetClokingById(id));
         }
 
         // POST: ClockingController/Edit/5
+        [Authorize(Roles = "User, Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Guid id, IFormCollection collection)
@@ -97,12 +105,14 @@ namespace MyWorkingEnvironment.Controllers
         }
 
         // GET: ClockingController/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(Guid id)
         {
             return View("DeleteClocking", _clockingRepository.GetClokingById(id));
         }
 
         // POST: ClockingController/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(Guid id, IFormCollection collection)

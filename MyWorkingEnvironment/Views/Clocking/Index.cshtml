@@ -5,19 +5,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Clocking List</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Add new clocking</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-@*            <th>
-                @Html.DisplayNameFor(model => model.IdClocking)
+            @*            <th>
+            @Html.DisplayNameFor(model => model.IdClocking)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdEmployee)
+            @Html.DisplayNameFor(model => model.IdEmployee)
             </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Name)
@@ -41,38 +41,46 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-@*            <td>
-                @Html.DisplayFor(modelItem => item.IdClocking)
+        @foreach (var item in Model)
+        {
+            <tr>
+                @*            <td>
+            @Html.DisplayFor(modelItem => item.IdClocking)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdEmployee)
+            @Html.DisplayFor(modelItem => item.IdEmployee)
             </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.In)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Out)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.IdClocking  }) |
-                @Html.ActionLink("Details", "Details", new {  id=item.IdClocking  }) |
-                @Html.ActionLink("Delete", "Delete", new {  id=item.IdClocking  })
-            </td>
-        </tr>
-}
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.In)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Out)
+                </td>
+                <td>
+                    @if (User.IsInRole("User") || User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new {  id=item.IdClocking  })  @:| 
+                        @Html.ActionLink("Details", "Details", new {  id=item.IdClocking  })  
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        @:|
+                        @Html.ActionLink("Delete", "Delete", new {  id=item.IdClocking  })
+                    }
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

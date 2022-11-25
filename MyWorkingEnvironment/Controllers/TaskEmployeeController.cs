@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MyWorkingEnvironment.Data;
 using MyWorkingEnvironment.Models;
 using MyWorkingEnvironment.Repository;
+using System.Data;
 
 namespace MyWorkingEnvironment.Controllers
 {
+    [Authorize(Roles = "User, Admin")]
     public class TaskEmployeeController : Controller
     {
         private EmployeeRepository _employeeRepository;
@@ -19,18 +22,21 @@ namespace MyWorkingEnvironment.Controllers
         }
 
         // GET: TaskEmployeeController
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Index()
         {
             return View(_taskEmployeeRepository.GetAllTaskEmployees());
         }
 
         // GET: TaskEmployeeController/Details/5
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Details(Guid id)
         {
             return View("DetailsTaskEmployee", _taskEmployeeRepository.GetTaskEmployeeById(id));
         }
 
         // GET: TaskEmployeeController/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             SetUpEmployeeListViewBag();
@@ -38,6 +44,7 @@ namespace MyWorkingEnvironment.Controllers
         }
 
         // POST: TaskEmployeeController/Create
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -60,6 +67,7 @@ namespace MyWorkingEnvironment.Controllers
         }
 
         // GET: TaskEmployeeController/Edit/5
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Edit(Guid id)
         {
             SetUpEmployeeListViewBag();
@@ -67,6 +75,7 @@ namespace MyWorkingEnvironment.Controllers
         }
 
         // POST: TaskEmployeeController/Edit/5
+        [Authorize(Roles = "User, Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Guid id, IFormCollection collection)
@@ -89,12 +98,14 @@ namespace MyWorkingEnvironment.Controllers
         }
 
         // GET: TaskEmployeeController/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(Guid id)
         {
             return View("DeleteTaskEmployee", _taskEmployeeRepository.GetTaskEmployeeById(id));
         }
 
         // POST: TaskEmployeeController/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(Guid id, IFormCollection collection)

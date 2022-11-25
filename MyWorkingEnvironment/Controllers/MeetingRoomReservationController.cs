@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MyWorkingEnvironment.Data;
 using MyWorkingEnvironment.Models;
 using MyWorkingEnvironment.Repository;
 using MyWorkingEnvironment.ViewModels;
+using System.Data;
 
 namespace MyWorkingEnvironment.Controllers
 {
+    [Authorize(Roles = "User, Admin")]
     public class MeetingRoomReservationController : Controller
     {
         private ReservationRepository _reservationRepository;
@@ -22,6 +25,7 @@ namespace MyWorkingEnvironment.Controllers
         }
 
         // GET: MeetingRoomReservationController
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Index()
         {
             var list = _meetingRoomReservationRepository.GetAllMeetingRoomReservations();
@@ -34,6 +38,7 @@ namespace MyWorkingEnvironment.Controllers
         }
 
         // GET: MeetingRoomReservationController/Details/5
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Details(Guid id)
         {
             var viewModel = new MeetingRoomReservationViewModel(_meetingRoomReservationRepository.GetMeetingRoomReservationById(id), 
@@ -43,6 +48,7 @@ namespace MyWorkingEnvironment.Controllers
         }
 
         // GET: MeetingRoomReservationController/Create
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Create()
         {
             var reservations = _reservationRepository.GetAllReservations();
@@ -56,6 +62,7 @@ namespace MyWorkingEnvironment.Controllers
         }
 
         // POST: MeetingRoomReservationController/Create
+        [Authorize(Roles = "User, Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -78,6 +85,7 @@ namespace MyWorkingEnvironment.Controllers
         }
 
         // GET: MeetingRoomReservationController/Edit/5
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Edit(Guid id)
         {
             var reservations = _reservationRepository.GetAllReservations();
@@ -91,6 +99,7 @@ namespace MyWorkingEnvironment.Controllers
         }
 
         // POST: MeetingRoomReservationController/Edit/5
+        [Authorize(Roles = "User, Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Guid id, IFormCollection collection)
@@ -113,12 +122,14 @@ namespace MyWorkingEnvironment.Controllers
         }
 
         // GET: MeetingRoomReservationController/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(Guid id)
         {
             return View("DeleteMeetingRoomReservation",_meetingRoomReservationRepository.GetMeetingRoomReservationById(id));
         }
 
         // POST: MeetingRoomReservationController/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(Guid id, IFormCollection collection)
