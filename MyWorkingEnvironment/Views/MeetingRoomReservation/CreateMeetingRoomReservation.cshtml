@@ -13,20 +13,13 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-@*            <div class="form-group">
-                <label asp-for="IdMeetingRoomReservation" class="control-label"></label>
-                <input asp-for="IdMeetingRoomReservation" class="form-control" />
-                <span asp-validation-for="IdMeetingRoomReservation" class="text-danger"></span>
-            </div>*@
             <div class="form-group">
                 <label asp-for="IdReservation" class="control-label">When?</label>
-                @*<input asp-for="IdReservation" class="form-control" />*@
                 @Html.DropDownList("IdReservation", new SelectList(@ViewBag.ReservationList, "Value", "Text"), "Select Reservation", new {@class="form-control"})
                 <span asp-validation-for="IdReservation" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdMeetingRoom" class="control-label">Where?</label>
-                @*<input asp-for="IdMeetingRoom" class="form-control" />*@
                 @Html.DropDownList("IdMeetingRoom", new SelectList(@ViewBag.MeetingRoomList, "Value", "Text"), "Select MeetingRoom", new {@class="form-control"})
                 <span asp-validation-for="IdMeetingRoom" class="text-danger"></span>
             </div>

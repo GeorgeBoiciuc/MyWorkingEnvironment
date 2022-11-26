@@ -13,18 +13,6 @@
 <table class="table">
     <thead>
         <tr>
-            @*            <th>
-            @Html.DisplayNameFor(model => model.IdMeetingRoomReservation)
-            </th>
-            <th>
-            @Html.DisplayNameFor(model => model.IdReservation)
-            </th>
-            <th>
-            @Html.DisplayNameFor(model => model.IdEmployee)
-            </th>
-            <th>
-            @Html.DisplayNameFor(model => model.IdMeetingRoom)
-            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Date)
             </th>
@@ -44,18 +32,6 @@
         @foreach (var item in Model)
         {
             <tr>
-                @*            <td>
-            @Html.DisplayFor(modelItem => item.IdMeetingRoomReservation)
-            </td>
-            <td>
-            @Html.DisplayFor(modelItem => item.IdReservation)
-            </td>
-            <td>
-            @Html.DisplayFor(modelItem => item.IdEmployee)
-            </td>
-            <td>
-            @Html.DisplayFor(modelItem => item.IdMeetingRoom)
-            </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.Date)
                 </td>

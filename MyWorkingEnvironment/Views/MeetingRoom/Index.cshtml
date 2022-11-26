@@ -13,9 +13,6 @@
 <table class="table">
     <thead>
         <tr>
-@*            <th>
-                @Html.DisplayNameFor(model => model.IdMeetingRoom)
-            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -31,9 +28,6 @@
     <tbody>
 @foreach (var item in Model.OrderBy(x=>x.Name)) {
         <tr>
-@*            <td>
-                @Html.DisplayFor(modelItem => item.IdMeetingRoom)
-            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>

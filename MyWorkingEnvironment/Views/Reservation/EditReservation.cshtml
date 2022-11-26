@@ -20,7 +20,6 @@
             </div>
             <div class="form-group">
                 <label asp-for="IdEmployee" hidden class="control-label"></label>
-                @*<input asp-for="IdEmployee" class="form-control" />*@
                 @Html.DropDownList("IdEmployee", new SelectList(@ViewBag.EmployeeList, "Value", "Text"), "Select Employee", new {@class="form-control"})
                 <span asp-validation-for="IdEmployee" class="text-danger"></span>
             </div>
