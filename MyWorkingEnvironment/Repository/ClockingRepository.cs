@@ -63,6 +63,17 @@ namespace MyWorkingEnvironment.Repository
             return MapDBObjectToModel(_dbContext.Clockings.FirstOrDefault(x => x.IdClocking == id));
         }
 
+        public List<ClockingModel> GetAllClokingsByEmployeeId(Guid id)
+        {
+            var dbObjectsList = _dbContext.Clockings.Where(x => x.IdEmployee == id).ToList();
+            var modelList = new List<ClockingModel>();
+            foreach (var dbObject in dbObjectsList)
+            {
+                modelList.Add(MapDBObjectToModel(dbObject));
+            }
+            return modelList;
+        }
+
         public void InsertClocking(ClockingModel model)
         {
             model.IdClocking = Guid.NewGuid();

@@ -65,6 +65,11 @@ namespace MyWorkingEnvironment.Repository
             return MapDBObjectToModel(_DbContext.Employees.FirstOrDefault(x => x.IdEmployee == id));
         }
 
+        public EmployeeModel GetEmployeeByEmailAddress(string email)
+        {
+            return MapDBObjectToModel(_DbContext.Employees.FirstOrDefault(x => x.Email == email));
+        }
+
         public void InsertEmployee(EmployeeModel employeeModel)
         {
             employeeModel.IdEmployee = Guid.NewGuid();

@@ -6,6 +6,7 @@ using MyWorkingEnvironment.Data;
 using MyWorkingEnvironment.Models;
 using MyWorkingEnvironment.Repository;
 using MyWorkingEnvironment.ViewModels;
+using System.Collections.Generic;
 
 namespace MyWorkingEnvironment.Controllers
 {
@@ -25,13 +26,14 @@ namespace MyWorkingEnvironment.Controllers
         [Authorize(Roles = "User, Admin")]
         public ActionResult Index()
         {
-            var list = _clockingRepository.GetAllClockings();
-            var viewModelList = new List<ClockingsEmployeeViewModel>();
-            foreach (var model in list)
+            if (User.IsInRole("User"))
             {
-                viewModelList.Add(new ClockingsEmployeeViewModel(model, _employeeRepository));
+                return View(CreateViewModelList(_clockingRepository.GetAllClokingsByEmployeeId(_employeeRepository.GetEmployeeByEmailAddress(User.Identity.Name).IdEmployee)));
             }
-            return View(viewModelList);
+            else
+            {
+                return View(CreateViewModelList(_clockingRepository.GetAllClockings()));
+            }
         }
 
         // GET: ClockingController/Details/5
@@ -62,6 +64,10 @@ namespace MyWorkingEnvironment.Controllers
                 var model = new ClockingModel();
                 var task = TryUpdateModelAsync(model);
                 task.Wait();
+                if (model.Type == "Vacation" && !CheckIfVacationClockingsAreLessThanVacationDays(model))
+                {
+                    return View("VacationDaysErrorPage");
+                }
                 if (task.Result)
                 {
                     _clockingRepository.InsertClocking(model);
@@ -126,6 +132,22 @@ namespace MyWorkingEnvironment.Controllers
             {
                 return RedirectToAction("Delete", id);
             }
+        }
+
+        private List<ClockingsEmployeeViewModel> CreateViewModelList(List<ClockingModel> list)
+        {
+            var viewModelList = new List<ClockingsEmployeeViewModel>();
+            foreach (var model in list)
+            {
+                viewModelList.Add(new ClockingsEmployeeViewModel(model, _employeeRepository));
+            }
+            return viewModelList;
+        }
+
+        private bool CheckIfVacationClockingsAreLessThanVacationDays(ClockingModel model)
+        {
+            return _employeeRepository.GetEmployeeById((Guid)model.IdEmployee).VacationDays >
+                _clockingRepository.GetAllClokingsByEmployeeId((Guid)model.IdEmployee).Where(x => x.Type == "Vacation").ToList().Count;
         }
     }
 }
